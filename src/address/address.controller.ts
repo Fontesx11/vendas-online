@@ -6,6 +6,7 @@ import { UserService } from 'src/user/user.service';
 import { CityService } from 'src/city/city.service';
 import { Roles } from 'src/decorators/roles.decorator';
 import { TypeUser } from 'src/user/enum/user-type.enum';
+import { UserId } from 'src/decorators/user-id.decorator';
 
 @Controller('address')
 export class AddressController {
@@ -17,9 +18,9 @@ export class AddressController {
     ) {}
 
     @Roles(TypeUser.User)
-    @Post('/:userId')
+    @Post()
     @UsePipes(ValidationPipe)
-    async createAddress(@Param('userId') userId: number, @Body() createAddressDto: CreateAddressDto): Promise<AddressEntity>{
+    async createAddress(@UserId() userId: number, @Body() createAddressDto: CreateAddressDto): Promise<AddressEntity>{
 
         await this.userService.findUserById(userId);
         await this.cityService.findCityById(createAddressDto.cityId);
