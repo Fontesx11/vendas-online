@@ -1,0 +1,1 @@
+export const authMock: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZVVzZXIiOjEsImlhdCI6MTc0NzA1Mjk0OSwiZXhwIjoxNzQ3NjU3NzQ5fQ.KKRWqf9vlDXYMD7UlkxuBMXt_Ft17PZRrVV276pd2Io"
