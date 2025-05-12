@@ -1,6 +1,6 @@
 import { IsInt, IsString } from "class-validator";
 import { AddressEntity } from "../entities/address.entity";
-import { ReturnCityDto } from "src/city/dto/returnCity.dto";
+import { ReturnCityDto } from "../../city/dto/returnCity.dto";
 
 
 export class ReturnAddressDto {

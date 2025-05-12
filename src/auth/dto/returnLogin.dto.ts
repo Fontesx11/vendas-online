@@ -1,4 +1,4 @@
-import { ReturnUserDto } from "src/user/dto/returnUser.dto";
+import { ReturnUserDto } from "../../user/dto/returnUser.dto";
 
 export interface ReturnLogin {
     user: ReturnUserDto;
