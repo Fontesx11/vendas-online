@@ -4,6 +4,7 @@ import { ProductEntity } from './entities/product.entity';
 import { Repository } from 'typeorm';
 import { CategoryService } from '../category/category.service';
 import { CreateProductDto } from './dtos/create-product.dto';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class ProductService {
@@ -27,5 +28,25 @@ export class ProductService {
         await this.categoryService.findCategoryById(createProductDto.categoryId)
 
         return await this.productRepository.save({...createProductDto})
+    }
+
+    async findProductById(productId: number): Promise<ProductEntity>{
+        const product = await this.productRepository.findOne({
+            where:{
+                id: productId
+            }
+        })
+        if(!product){
+            throw new NotFoundException('Product Id not found')
+        }
+
+        return product;
+    }
+
+    async deleteProduct(productId: number): Promise<DeleteResult> {
+        await this.findProductById(productId);
+
+        return this.productRepository.delete({id: productId});
+        
     }
 }
