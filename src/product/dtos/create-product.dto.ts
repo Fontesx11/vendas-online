@@ -1,15 +1,15 @@
-import { ProductEntity } from "../entities/product.entity";
+import { IsNumber, IsString } from "class-validator";
 
-export class ReturnProductDto {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
+export class CreateProductDto{
+  @IsNumber()
+  categoryId: number;
 
-    constructor(productEntity: ProductEntity){
-        this.id = productEntity.id,
-        this.name = productEntity.name;
-        this.price= productEntity.price;
-        this.image= productEntity.image;
-    }
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  price: number;
+
+  @IsString()
+  image: string;
 }
