@@ -5,7 +5,7 @@ import { ReturnProductDto } from './dtos/return-product.dto';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { DeleteResult } from 'typeorm';
-import { UpdateProductDto } from './dtos/update-product.dto copy';
+import { UpdateProductDto } from './dtos/update-product.dto';
 import { ProductEntity } from './entities/product.entity';
 
 @Roles(TypeUser.Admin, TypeUser.User)
