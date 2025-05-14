@@ -1,3 +1,4 @@
+import { CartProductEntity } from '../../cart-product/entities/cart-product.entity';
 import { CategoryEntity } from '../../category/entities/category.entity';
 import {
   Column,
@@ -31,6 +32,8 @@ export class ProductEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  cartProduct?: CartProductEntity[];
 
   @ManyToOne(
     () => CategoryEntity,

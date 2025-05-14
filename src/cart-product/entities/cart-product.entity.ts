@@ -1,0 +1,46 @@
+import { CartEntity } from "src/cart/entities/cart.entity";
+import { ProductEntity } from "../../product/entities/product.entity";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+@Entity({ name: 'cartProduct' })
+export class CartProductEntity {
+  @PrimaryGeneratedColumn('rowid')
+  id: number;
+
+  @Column({ name: 'cart_id', nullable: false })
+  cartId: string;
+
+  @Column({ name: 'product_id', nullable: false })
+  productId: string;
+
+  @Column({ name: 'amount', nullable: false })
+  amount: string;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
+
+  @ManyToOne(()=> ProductEntity,
+   (productEntity) => productEntity.cartProduct,
+  )
+  @JoinColumn({name: "product_id", referencedColumnName: 'id'})
+  product?: ProductEntity;
+
+  @ManyToOne(()=> CartEntity, (cartEntity) => cartEntity.cartProduct)
+  @JoinColumn({name: "cart_id", referencedColumnName: 'id'})
+  cart?: CartEntity;
+
+
+
+}
