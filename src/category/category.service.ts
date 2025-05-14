@@ -28,7 +28,6 @@ export class CategoryService {
             throw new BadRequestException("Alredy registired")
         }
 
-        console.log(createCategory)
         return await this.categoryRepository.save(createCategory);
     }
 
