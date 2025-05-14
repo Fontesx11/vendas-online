@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, UpdateResult } from 'typeorm';
 import { TypeUser } from './enum/user-type.enum';
 import { UpdatePasswordDto } from './dto/update-password.dto';
-import { creatPasswordHashed, validatePassword } from 'src/utils/password';
+import { creatPasswordHashed, validatePassword } from '../utils/password';
 
 @Injectable()
 export class UserService {

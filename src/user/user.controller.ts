@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { UserEntity } from './entities/user.entity';
 import { ReturnUserDto } from './dto/returnUser.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserId } from '../decorators/user-id.decorator';
 
 @Controller('user')
 export class UserController {
