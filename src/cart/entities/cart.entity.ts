@@ -1,4 +1,4 @@
-import { CartProductEntity } from "src/cart-product/entities/cart-product.entity";
+import { CartProductEntity } from "../../cart-product/entities/cart-product.entity";
 import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({name:'cart'})
