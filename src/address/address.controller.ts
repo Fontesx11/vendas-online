@@ -15,18 +15,12 @@ export class AddressController {
 
     constructor(
         private readonly addressService: AddressService,
-        private readonly userService: UserService,
-        private readonly cityService: CityService,
     ) {}
 
   
     @Post()
     @UsePipes(ValidationPipe)
     async createAddress(@UserId() userId: number, @Body() createAddressDto: CreateAddressDto): Promise<AddressEntity>{
-
-        await this.userService.findUserById(userId);
-        await this.cityService.findCityById(createAddressDto.cityId);
-
         return this.addressService.createAddress(createAddressDto, userId)
     }
 
