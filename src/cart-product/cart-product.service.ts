@@ -31,7 +31,7 @@ export class CartProductService {
     return cartProduct;
   }
 
-  async createCartProdudctInCart(insertCartDto: InsertCartDto, cartId: number): Promise<CartProductEntity>{
+  async createProductInCart(insertCartDto: InsertCartDto, cartId: number): Promise<CartProductEntity>{
     return this.cartProductRepository.save({
       amount: insertCartDto.amount,
       productId: insertCartDto.productId,
@@ -40,13 +40,13 @@ export class CartProductService {
     });
   }
 
-  async insertProductInCart(insertCart: InsertCartDto, cart: CartEntity){
+  async insertProductInCart(insertCart: InsertCartDto, cart: CartEntity): Promise<CartProductEntity>{
     await this.productService.findProductById(insertCart.productId);
 
     const cartProduct =  await this.verifyProductInCart(insertCart.productId, cart.id).catch(()=> undefined);
     
     if(!cartProduct){
-      return this.createCartProdudctInCart(insertCart, cart.id);
+      return this.createProductInCart(insertCart, cart.id);
     };
     
     return this.cartProductRepository.save({
@@ -55,7 +55,7 @@ export class CartProductService {
     });
   }
 
-  async updateProductAmountInCart(cart: CartEntity, updateCartDto:UpdateCartDto){
+  async updateProductAmountInCart(cart: CartEntity, updateCartDto:UpdateCartDto): Promise<CartProductEntity>{
     await this.productService.findProductById(updateCartDto.productId);
 
     const cartProduct =  await this.verifyProductInCart(updateCartDto.productId, cart.id);
