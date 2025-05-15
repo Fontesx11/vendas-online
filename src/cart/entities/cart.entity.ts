@@ -9,6 +9,9 @@ export class CartEntity {
     @Column({name: 'user_id', nullable: false})
     userId: number;
 
+    @Column({name: 'active', nullable: false})
+    active: boolean;
+
     @UpdateDateColumn({name: 'updated_at'})
     updatedAt: Date;
 

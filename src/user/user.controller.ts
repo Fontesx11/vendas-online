@@ -5,7 +5,7 @@ import { UserEntity } from './entities/user.entity';
 import { ReturnUserDto } from './dto/returnUser.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UserId } from '../decorators/user-id.decorator';
-import { Roles } from 'src/decorators/roles.decorator';
+import { Roles } from '../decorators/roles.decorator';
 import { TypeUser } from './enum/user-type.enum';
 
 @Controller('user')
