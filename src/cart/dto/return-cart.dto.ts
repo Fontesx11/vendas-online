@@ -1,4 +1,3 @@
-import { CartProductEntity } from "src/cart-product/entities/cart-product.entity";
 import { CartEntity } from "../entities/cart.entity";
 import { ReturnCartProductDto } from "src/cart-product/dtos/return-cart-products.dto";
 
