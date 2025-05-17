@@ -2,6 +2,7 @@ import { Body, Controller, Param, Post, UsePipes, ValidationPipe } from '@nestjs
 import { CreateOrderDto } from './dtos/create-order.dto';
 import { OrderService } from './order.service';
 import { UserId } from 'src/decorators/user-id.decorator';
+import { OrderEntity } from './entities/order.entity';
 
 @Controller('order')
 export class OrderController {
@@ -10,9 +11,9 @@ export class OrderController {
     private readonly orderService: OrderService,
   ){}
 
-  @Post('/cart/:cartId')
+  @Post()
   @UsePipes(ValidationPipe)
-  async createOrder(@Param('cartId') cartId: number, @UserId() userId: number, @Body() createOrderDto: CreateOrderDto){
-     await this.orderService.createOder(createOrderDto,cartId,userId);
+  async createOrder(@UserId() userId: number, @Body() createOrderDto: CreateOrderDto):Promise<OrderEntity>{
+    return await this.orderService.createOder(createOrderDto,userId);
   }
 }
