@@ -42,6 +42,8 @@ export class PaymentService {
     const finalPrice = this.generateFinalPrice(cart, products)
 
     if(createOrderDto.amountPayments){
+
+      console.log("oi")
       const paymentCreditCard =  new PaymentCreditCartEntity(
         paymentType.Done,
         finalPrice,
