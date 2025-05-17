@@ -3,7 +3,7 @@ import {
   Column,
 } from 'typeorm';
 import { PaymentEntity } from './payment.entity';
-import { CreateOrderDto } from 'src/order/dtos/create-order.dto';
+import { CreateOrderDto } from '../../order/dtos/create-order.dto';
 
 @ChildEntity()
 export class PaymentCreditCartEntity extends PaymentEntity{
