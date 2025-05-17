@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { OrderEntity } from './entities/order.entity';
 import { Repository } from 'typeorm';
 import { CreateOrderDto } from './dtos/create-order.dto';
+import { PaymentService } from 'src/payment/payment.service';
 
 @Injectable()
 export class OrderService {
@@ -10,10 +11,12 @@ export class OrderService {
 
    constructor(
     @InjectRepository(OrderEntity)
-    private readonly onderRepository: Repository<OrderEntity>
+    private readonly onderRepository: Repository<OrderEntity>,
+    private readonly paymentService: PaymentService
   ){}
 
   async createOder(createOrderDto: CreateOrderDto, cartId: number){
-   return null
+    await this.paymentService.createPayment(createOrderDto);
+    return null
   }
 }
