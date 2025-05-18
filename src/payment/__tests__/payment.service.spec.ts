@@ -12,6 +12,8 @@ import { PaymentPixEntity } from '../entities/payment-pix.entity';
 import { PaymentCreditCartEntity } from '../entities/payment-credit-cart.entity';
 import { paymentCreditCardMock } from '../__mocks__/payment-credit-card.mock';
 import { BadRequestException } from '@nestjs/common';
+import { cartProductMock } from '../../cart-product/__mocks__/cart-product.mock';
+import { paymentType } from '../../payment-status/enums/payment-type.enum';
 
 describe('PaymentService', () => {
   let service: PaymentService;
@@ -59,23 +61,57 @@ describe('PaymentService', () => {
     expect(savePayment.amountPayments).toEqual(paymentCreditCardMock.amountPayments);
   });
 
-  it('should return credit card payment in save', async () => {
-    const spy = jest.spyOn(paymentRepository,  'save');
-    const payment = await service.createPayment(createOrderCreditCardMock,[productMock],cartMock)
-
-    const savePayment: PaymentCreditCartEntity = spy.mock.calls[0][0] as PaymentCreditCartEntity;
-
-    expect(payment).toEqual(paymentMock);
-    expect(savePayment.amountPayments).toEqual(paymentCreditCardMock.amountPayments);
-  });
-
-  it('should return error if send imcomplete data', async () => {
+  it('should return error if send incomplete data', async () => {
       expect(service.createPayment(
         {addressId: 1},
         [productMock],
         cartMock
       ),
     ).rejects.toThrow(BadRequestException)
+  });
+
+  it('should finalprice = 0 when cart undefined', async () => {
+    const spy = jest.spyOn(paymentRepository,  'save');
+
+    await service.createPayment(createOrderCreditCardMock,[productMock],cartMock)
+
+    const savePayment: PaymentPixEntity = spy.mock.calls[0][0] as PaymentPixEntity;
+
+    expect(savePayment.finalPrice).toEqual(0);
+  });
+
+  it('should return same finalprice when cart defined', async () => {
+    const spy = jest.spyOn(paymentRepository,  'save');
+
+    await service.createPayment(createOrderCreditCardMock,[productMock],{
+      ...cartMock,
+      cartProduct: [cartProductMock],
+    })
+
+    const savePayment: PaymentPixEntity = spy.mock.calls[0][0] as PaymentPixEntity;
+
+    expect(savePayment.finalPrice).toEqual(68.6);
+  });
+
+  it('should return all data in save payment', async () => {
+    const spy = jest.spyOn(paymentRepository,  'save');
+
+    await service.createPayment(createOrderCreditCardMock,[productMock],{
+      ...cartMock,
+      cartProduct: [cartProductMock],
+    })
+
+    const savePayment: PaymentPixEntity = spy.mock.calls[0][0] as PaymentPixEntity;
+
+    const creditCardPayment = new PaymentCreditCartEntity (
+      paymentType.Done,
+      68.6,
+      0,
+      68.6,
+      createOrderCreditCardMock,
+    )
+
+    expect(savePayment).toEqual(creditCardPayment);
   });
 
 });

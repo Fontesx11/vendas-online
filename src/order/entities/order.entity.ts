@@ -30,6 +30,12 @@ export class OrderEntity {
   @Column({ name: 'payment_id', nullable: false })
   paymentId: number;
 
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
+
   @ManyToOne(() => UserEntity, (user) => user.orders)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user?: UserEntity;
