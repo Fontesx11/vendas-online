@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ReturnCep } from './dtos/return-cep.dto';
 import { CityService } from 'src/city/city.service';
 import { ReturnCepExternal } from './dtos/return-external-cep.dto';
+import { CityEntity } from 'src/city/entities/city.entity';
 
 
 
@@ -17,7 +18,7 @@ export class CorreiosService {
         private readonly cityService: CityService,
     ) {}
 
-  async findAddressByCEP(cep: string): Promise<ReturnCepExternal> {
+  async findAddressByCEP(cep: string): Promise<ReturnCep> {
 
     if (!this.URL_CORREIOS) {
       throw new Error('URL_CEP_CORREIOS environment variable is not defined');
@@ -35,11 +36,13 @@ export class CorreiosService {
         }) 
 
 
-    const city = await this.cityService.findCityByName(returnCEP.localidade, returnCEP.uf)
+    const city: CityEntity | undefined = await this.cityService
+      .findCityByName(returnCEP.localidade, returnCEP.uf)
+      .catch(() => undefined);
 
     console.log(city)
 
-    return returnCEP
+    return new ReturnCep(returnCEP, city?.id, city?.state?.id)
    
   }
 }
