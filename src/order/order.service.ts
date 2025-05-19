@@ -11,6 +11,7 @@ import { PaymentEntity } from '../payment/entities/payment.entity';
 import { CartEntity } from '../cart/entities/cart.entity';
 import { ProductEntity } from '../product/entities/product.entity';
 import { OrderProductEntity } from '../order-product/entities/oder-product.entity';
+import { ReturnOrderDTO } from './dtos/return-order.dto';
 
 @Injectable()
 export class OrderService {
@@ -86,6 +87,20 @@ export class OrderService {
         payment: {
           paymentStatus: true,
         },
+      },
+    });
+
+    if (!orders || orders.length === 0) {
+      throw new NotFoundException('Orders not found');
+    }
+
+    return orders;
+  }
+
+  async findAllOrders(): Promise<OrderEntity[]> {
+    const orders = await this.orderRepository.find({
+      relations: {
+        user: true,
       },
     });
 

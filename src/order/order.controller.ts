@@ -3,6 +3,7 @@ import { CreateOrderDto } from './dtos/create-order.dto';
 import { OrderService } from './order.service';
 import { UserId } from '../decorators/user-id.decorator';
 import { OrderEntity } from './entities/order.entity';
+import { ReturnOrderDTO } from './dtos/return-order.dto';
 
 @Controller('order')
 export class OrderController {
@@ -20,5 +21,10 @@ export class OrderController {
   @Get()
   async findOrderByUserId(@UserId() userId: number){
     return this.orderService.findOrdersByUserId(userId);
+  }
+
+  @Get('/all')
+  async findallOrders(): Promise<ReturnOrderDTO[]>{
+    return (await this.orderService.findAllOrders()).map((order)=> new ReturnOrderDTO(order));
   }
 }
