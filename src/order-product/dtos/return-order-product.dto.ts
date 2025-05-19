@@ -1,5 +1,5 @@
 import { ReturnOrderDTO } from '../../order/dtos/return-order.dto';
-import { ReturnProductDto } from 'src/product/dtos/return-product.dto';
+import { ReturnProductDto } from '../../product/dtos/return-product.dto';
 import { OrderProductEntity } from '../entities/oder-product.entity';
 
 export class ReturnOrderProductDTO {

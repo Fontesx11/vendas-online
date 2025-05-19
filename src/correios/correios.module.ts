@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CorreiosService } from './correios.service';
 import { HttpModule } from '@nestjs/axios';
 import { CorreiosController } from './correios.controller';
-import { CityModule } from 'src/city/city.module';
+import { CityModule } from '../city/city.module';
 
 @Module({
    imports: [HttpModule.register({

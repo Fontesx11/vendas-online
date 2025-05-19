@@ -3,9 +3,9 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { AxiosError, AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 import { ReturnCep } from './dtos/return-cep.dto';
-import { CityService } from 'src/city/city.service';
+import { CityService } from '../city/city.service';
 import { ReturnCepExternal } from './dtos/return-external-cep.dto';
-import { CityEntity } from 'src/city/entities/city.entity';
+import { CityEntity } from '../city/entities/city.entity';
 
 
 

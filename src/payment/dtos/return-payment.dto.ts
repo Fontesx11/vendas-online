@@ -1,4 +1,4 @@
-import { ReturnPaymentStatus } from 'src/payment-status/dtos/return-payment-status.dto';
+import { ReturnPaymentStatus } from '../../payment-status/dtos/return-payment-status.dto';
 import { PaymentStatusEntity } from '../../payment-status/entities/payment-status.entity';
 import { PaymentEntity } from '../entities/payment.entity';
 
