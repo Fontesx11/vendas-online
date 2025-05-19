@@ -21,7 +21,7 @@ export class ProductController {
         return (await this.productService.findAll([], true)).map((product)=> new ReturnProductDto(product)) 
     }
 
-    @Roles(TypeUser.Admin)
+    @Roles(TypeUser.Admin , TypeUser.User)
     @UsePipes(ValidationPipe)
     @Post()
     async createProduct(@Body() createProductDto: CreateProductDto): Promise<ReturnProductDto>{
