@@ -19,12 +19,12 @@ export class OrderController {
   }
 
   @Get()
-  async findOrderByUserId(@UserId() userId: number){
+  async findOrdersByUserId(@UserId() userId: number){
     return this.orderService.findOrdersByUserId(userId);
   }
 
   @Get('/all')
-  async findallOrders(): Promise<ReturnOrderDTO[]>{
+  async findAllOrders(): Promise<ReturnOrderDTO[]>{
     return (await this.orderService.findAllOrders()).map((order)=> new ReturnOrderDTO(order));
   }
 }
