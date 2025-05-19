@@ -1,4 +1,4 @@
-import { ReturnCategoryDto } from "src/category/dtos/return-categorydto";
+import { ReturnCategoryDto } from "../../category/dtos/return-category.dto";
 import { ProductEntity } from "../entities/product.entity";
 
 export class ReturnProductDto {

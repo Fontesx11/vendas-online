@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CategoryEntity } from './entities/category.entity';
-import { ReturnCategoryDto } from './dtos/return-categorydto';
+import { ReturnCategoryDto } from './dtos/return-category.dto';
 import { CategoryService } from './category.service';
 import { Roles } from '../decorators/roles.decorator';
 import { TypeUser } from '../user/enum/user-type.enum';
