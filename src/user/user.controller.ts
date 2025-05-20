@@ -20,6 +20,12 @@ export class UserController {
     return this.userService.createUser(createUser);
   }
 
+  @Roles(TypeUser.Root)
+  @Post('/admin')
+  async createAdmin(@Body() createUser: CreateUserDto): Promise<UserEntity> {
+    return this.userService.createUser(createUser, TypeUser.Admin);
+  }
+
   @Roles(TypeUser.Admin)
   @Get('/all')
   async getAllUsers(): Promise<ReturnUserDto[]>{
