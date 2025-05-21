@@ -11,6 +11,7 @@ import { ReturnCategoryDto } from '../dtos/return-category.dto';
 import { productMock } from '../../product/__mocks__/product.mock';
 import { BadRequestException } from '@nestjs/common';
 import { returnDeleteMock } from '../../__mocks__/return-deleted.mock';
+import { updateCategoryMock } from '../__mocks__/update-category.mock';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -140,5 +141,36 @@ describe('CategoryService', () => {
       },
     });
   });
+
+  it('should send new category to save', async () => {
+    const spy = jest.spyOn(categoryRepository, 'save')
+    await service.updateCategoryById(categoryMock.id, updateCategoryMock)
+
+
+    expect(spy.mock.calls[0][0]).toEqual({
+      ...categoryMock,
+      ...updateCategoryMock,
+    });
+  });
+
+  it('should return error new category to save', async () => {
+    const spy = jest.spyOn(categoryRepository, 'findOne')
+    const category = await service.updateCategoryById(categoryMock.id, updateCategoryMock)
+
+    expect(category).toEqual(categoryMock);
+    expect(spy.mock.calls.length > 0).toEqual(true);
+  });
+
+  it('should return error if category with relations', async () => {
+    jest.spyOn(categoryRepository, 'findOne').mockResolvedValue({
+      ...categoryMock,
+      products: [productMock],
+    });
+
+    expect(service.deleteCategoryById(categoryMock.id)).rejects.toThrow(
+      BadRequestException,
+    );
+  });
+
 
 });
