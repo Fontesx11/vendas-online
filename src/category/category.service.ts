@@ -45,10 +45,10 @@ export class CategoryService {
 
     async createCategory(createCategory: CreateCategory): Promise<CategoryEntity>{
 
-        const category = await this.findCategoryByName(createCategory.name).catch(()=>undefined)
+        const category = await this.findCategoryByName(createCategory.name).catch(()=>undefined);
 
         if(category){
-            throw new BadRequestException("Alredy registired")
+            throw new BadRequestException("Alredy registired");
         }
 
         return await this.categoryRepository.save(createCategory);
@@ -68,12 +68,12 @@ export class CategoryService {
     }
 
     async findCategoryById(categoryId: number, isRelations?: boolean): Promise<CategoryEntity>{
-
+        
         const relations = isRelations 
           ? {
                 products: true
             } 
-            : undefined
+            : undefined         
 
         const category =  await this.categoryRepository.findOne({
             where:{
@@ -97,7 +97,7 @@ export class CategoryService {
             throw new BadRequestException('Category has products associeted')
         }
 
-        return await this.categoryRepository.delete({id: categoryId})
+        return await this.categoryRepository.delete({id: categoryId});
     }
 
     async updateCategoryById(categoryId: number, updateCategoryDto: UpdateCategoryDto): Promise<CategoryEntity>{
